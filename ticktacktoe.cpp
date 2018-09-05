@@ -1,4 +1,4 @@
-cclass TickTackToe {
+class TickTackToe {
 	Symbol field[3][3];
 	Player players[2];
 public:
