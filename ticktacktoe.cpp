@@ -1,41 +1,42 @@
-class TickTackToe {
-	Symbol field[3][3];
-	Player players[2];
-public:
-	TickTackToe() {
-		for (int i = 0; i < 3; i++)
-			for (int j = 0; j < 3; j++)
-				field[3][3] = EMPTY;
-		players[2] = (CIRCLE), (CROSS);
-	}
+#include "TickTackToe.h"
 
-	Symbol * GetField() {
-		return *field;
-	}
+TickTackToe::TickTackToe() {
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			field[3][3] = EMPTY;
+}
 
-	Symbol IfVictory() {
-		for (int i = 0; i < 3; i++) {
-			if (field[i][0] != EMPTY)
-				for (int j = 1; j < 2; j++)
-					if (field[i][0] != field[i][j] || field[0][i] != field[j][j])
-						break;
-					else if (j = 2)
-						return field[i][0];
-		}
+TickTackToe::Symbol TickTackToe::GetTheWinner() {
+	for (int i = 0; i < 3; i++) {
+		if (field[i][0] != EMPTY)
+			for (int j = 1; j < 2; j++)
+				if (field[i][0] != field[i][j] || field[0][i] != field[j][j])
+					break;
+				else if (j = 2)
+					return field[i][0];
 	}
+	if ((field[0][0] != EMPTY || field[1][1] == field[0][0] || field[2][2] == field[1][1]) || (field[2][0] != EMPTY || field[2][0] == field[1][1] || field[2][0] == field[0][2]))
+		return field[1][1];
+}
 
-	bool IfDraw() {
-		for (int i = 0; i < 3; i++)
-			for (int j = 1; j < 3; j++)
-				if (!field[i][j])
-					return false;
-		return true;
-	}
+TickTackToe::Symbol TickTackToe::GetField() {
+	return field;
+}
 
-	Symbol operator()(int x[2], int o[2]) {
-		players[0].MakeTurn(field[x[0]][x[1]]);
-		players[1].MakeTurn(field[o[0]][o[1]]);
-	}
-};
+bool TickTackToe::IfDraw() {
+	for (int i = 0; i < 3; i++)
+		for (int j = 1; j < 3; j++)
+			if (!field[i][j])
+				return false;
+	return true;
+}
 
-	
+void TickTackToe::operator()(int x[2], int o[2]) {
+	field[x[0]][x[1]] = CIRCLE;
+	field[o[0]][o[1]] = CROSS;
+}
+
+void TickTackToe::operator()(int circleLine, int circleColumn, int crossLine, int crossColumn) {
+	field[circleLine][circleColumn] = CIRCLE;
+	field[crossLine][crossColumn] = CROSS;
+}
