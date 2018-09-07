@@ -15,11 +15,11 @@ TickTackToe::Symbol TickTackToe::GetTheWinner() {
 				else if (j = 2)
 					return field[i][0];
 	}
-	if ((field[0][0] != EMPTY || field[1][1] == field[0][0] || field[2][2] == field[1][1]) || (field[2][0] != EMPTY || field[2][0] == field[1][1] || field[2][0] == field[0][2]))
+	if ((field[0][0] != EMPTY && field[1][1] == field[0][0] && field[2][2] == field[1][1]) || (field[2][0] != EMPTY && field[2][0] == field[1][1] && field[2][0] == field[0][2]))
 		return field[1][1];
 }
 
-TickTackToe::Symbol TickTackToe::GetField() {
+TickTackToe::Symbol * TickTackToe::GetField() {
 	return field;
 }
 
